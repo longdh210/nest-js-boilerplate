@@ -2,6 +2,8 @@ FROM node:19-alpine as development
 
 WORKDIR /usr/src/app
 
+ENV NODE_ENV=development
+
 COPY package*.json ./
 
 RUN npm install glob rimraf
@@ -14,7 +16,7 @@ RUN npm run build
 
 CMD [ "npm", "run", "start:dev" ]
 
-FROM node:10-alpine as production
+FROM node:19-alpine as production
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
